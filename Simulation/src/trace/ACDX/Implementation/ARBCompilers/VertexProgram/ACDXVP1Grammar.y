@@ -37,7 +37,7 @@ using namespace acdlib;
 #define CREATE_EMPTY_STRING(str_ptr)               CREATE_STRING(str_ptr, "")
 
 
-void yyerror(char *s)
+void yyerror(void*, char *s)
 {
     panic("ACDXVP1Grammar.y","yyerror()","Sintactic error in Vertex Program");
 }
@@ -94,6 +94,8 @@ TOK_SCENECOLOR TOK_LIGHTPROD TOK_TEXGEN TOK_EYE TOK_OBJECT TOK_S_COORD TOK_T_COO
 TOK_PARAMS TOK_CLIP TOK_PLANE TOK_POINT_C TOK_SIZE_C TOK_ATTENUATION TOK_MATRIX TOK_INVERSE TOK_TRANSPOSE
 TOK_INVTRANS TOK_MODELVIEW TOK_PROJECTION TOK_MVP TOK_TEXTURE TOK_PALETTE TOK_FRONT TOK_BACK TOK_PRIMARY TOK_SECONDARY
 TOK_POINTSIZE TOK_POINT_POINT TOK_ENV TOK_LOCAL
+
+%parse-param { void* irtree }
 
 %type <irprogram> program ARBVP10_program
 
@@ -748,7 +750,7 @@ TOK_POINTSIZE TOK_POINT_POINT TOK_ENV TOK_LOCAL
             $$ = $1;
         }
     ;
-    vtxOptWeightNum  : { $$ = 0; }
+    vtxOptWeightNum  : integer
         {
             $$ = 0; // Default value
         }
