@@ -61,6 +61,7 @@ static int lin=1;
 %}
 
 %option noyywrap
+%option never-interactive
 
 DIGIT               [0-9]
 LETTER              [a-zA-Z\_\$]
