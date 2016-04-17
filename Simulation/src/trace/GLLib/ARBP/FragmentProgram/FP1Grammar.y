@@ -40,7 +40,7 @@ using namespace libgl;
 #define CREATE_EMPTY_STRING(str_ptr)               CREATE_STRING(str_ptr, "")
 
 
-void yyerror(char *s)
+void yyerror(void* irtree, char *s)
 {
     panic("FP1Grammar.y","yyerror()","Sintactic error in Fragment Program");
 }
@@ -98,6 +98,8 @@ list<string*> fp1ASTStringCollector;
  TOK_FOG TOK_PARAMS TOK_DEPTH TOK_RANGE TOK_MATRIX TOK_MODELVIEW TOK_PROJECTION TOK_MVP TOK_PALETTE
  TOK_INVERSE TOK_TRANSPOSE TOK_INVTRANS TOK_ROW TOK_POINT_POINT TOK_INT_CONST TOK_FLOAT_CONST TOK_IDENT TOK_COMPONENT
  TOK_1D TOK_2D TOK_3D TOK_CUBE TOK_RECT TOK_END
+
+%parse-param { void* irtree }
 
 %type <irprogram> program ARBFP10_program
 %type <iroption> option
